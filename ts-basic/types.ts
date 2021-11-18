@@ -82,7 +82,7 @@ function printResult(num: number): void {
 // some function as Type
 // let combineValues = Function;
 let combineValues: (a: number, b: number) => number;
-combineValues = addFunc;
+// combineValues = addFunc;
 
 function addAndHandle(n1: number, n2: number, cb: (num: number) => void) {
   const result = n1 + n2;

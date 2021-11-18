@@ -1,3 +1,4 @@
+"use strict";
 // const person: {
 //   name: string;
 //   age: number;
@@ -16,26 +17,25 @@ var Role;
     Role[Role["AUTHOR"] = 200] = "AUTHOR";
 })(Role || (Role = {}));
 // object
-var person = {
+const person = {
     name: "DONG",
     age: 30,
     hobbies: ["Sports", "Cooking"],
     role: [2, "author"],
     role2: Role.ADMIN,
-    role3: ["Hello"]
+    role3: ["Hello"],
 };
 console.log(person.name);
-for (var _i = 0, _a = person.hobbies; _i < _a.length; _i++) {
-    var hobby = _a[_i];
+for (const hobby of person.hobbies) {
     // console.log(hobby.toUpperCase());
     console.log(hobby);
 }
 // let favoriteActivities: string[];
 // favoriteActivities = ["Sports", "Cooking"];
-var favoriteActivities;
+let favoriteActivities;
 favoriteActivities = ["Sports", 1, ["string"]];
 function addFunc(n1, n2, resultConversion) {
-    var result;
+    let result;
     if (typeof n1 == "number" && typeof n2 == "number") {
         result = n1 + n2;
     }
@@ -45,8 +45,8 @@ function addFunc(n1, n2, resultConversion) {
     return resultConversion == "as-number" ? +result : result.toString();
 }
 console.log(typeof addFunc("30", "20", "as-number"));
-var p1 = { title: "A Book", price: 12.99 };
-var u1 = { name: "Max" };
+const p1 = { title: "A Book", price: 12.99 };
+let u1 = { name: "Max" };
 u1 = "Michael";
 // void Type
 function printResult(num) {
@@ -54,18 +54,18 @@ function printResult(num) {
 }
 // some function as Type
 // let combineValues = Function;
-var combineValues;
-combineValues = addFunc;
+let combineValues;
+// combineValues = addFunc;
 function addAndHandle(n1, n2, cb) {
-    var result = n1 + n2;
+    const result = n1 + n2;
     cb(result);
 }
-addAndHandle(10, 20, function (result) {
+addAndHandle(10, 20, (result) => {
     console.log("result: ", result);
 });
 // unknow Type
-var userInput;
-var userName;
+let userInput;
+let userName;
 userInput = 5;
 userInput = "DONG";
 // userName = userInput // error
@@ -76,5 +76,6 @@ if (typeof userInput === "string") {
 function generateError(message, code) {
     throw { message: message, errorCode: code };
 }
-var result = generateError("An error occured!", 500);
+const result = generateError("An error occured!", 500);
 console.log(result); // No undefined return (error occurred)
+//# sourceMappingURL=types.js.map
