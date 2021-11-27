@@ -7,3 +7,4 @@
   6. [Intersection Type](https://blog.naver.com/y2kdj9723/222574694033, "개발할 생각")
   7. [Type Guard + Discriminating Unions](https://blog.naver.com/y2kdj9723/222574711181, "개발할 생각")
   8. [Generic - Basic & Class](https://blog.naver.com/y2kdj9723/222578185437, "개발할 생각")
+  9. [Generic - Constraints](https://blog.naver.com/y2kdj9723/222578185437, "개발할 생각")
