@@ -11,3 +11,4 @@
   10. [Indexed Access Type](https://blog.naver.com/y2kdj9723/222597241091, "개발할 생각")
   11. [Keyof & Typeof](https://blog.naver.com/y2kdj9723/222597922665, "개발할 생각")
   11. [Conditional Type - 1](https://blog.naver.com/y2kdj9723/222599331465, "개발할 생각")
+  12. [Mapped Type](https://blog.naver.com/y2kdj9723/222600188257, "개발할 생각")
