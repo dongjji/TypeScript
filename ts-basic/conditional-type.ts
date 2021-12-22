@@ -45,3 +45,60 @@ let b = createLabel(2.8);
 
 let c = createLabel(Math.random() ? "hello" : 42);
 //   let c: NameLabel | IdLabel
+
+type MessageOf<T> = T extends { message: unknown } ? T["message"] : never;
+
+interface Email {
+  message: string;
+}
+
+interface Dog {
+  bark(): void;
+}
+
+type EmailMessageContents = MessageOf<Email>;
+
+// type EmailMessageContents = string
+
+type DogMessageContents = MessageOf<Dog>;
+
+// type DogMessageContents = never
+
+type Flatten<T> = T extends any[] ? T[number] : T;
+
+// Extracts out the element type.
+type Str = Flatten<string[]>;
+
+// type Str = string
+
+// Leaves the type alone.
+type Num = Flatten<number>;
+
+// type Num = number
+
+type GetReturnType<Type> = Type extends (...args: never[]) => infer Return
+  ? Return
+  : never;
+
+type Num2 = GetReturnType<() => number>;
+// type Num = number
+
+type Str2 = GetReturnType<(x: string) => string>;
+// type Str2 = string
+
+type Bools = GetReturnType<(a: boolean, b: boolean) => boolean[]>;
+// type Bools2 = boolean[]
+
+declare function stringOrNum(x: string): number;
+declare function stringOrNum(x: number): string;
+declare function stringOrNum(x: string | number): string | number;
+
+type T1 = ReturnType<typeof stringOrNum>;
+
+type ToArray<Type> = Type extends any ? Type[] : never;
+
+type StrArrOrNumArr = ToArray<string | number>;
+
+type ToArrayNonDist<Type> = [Type] extends [any] ? Type[] : never;
+
+type StrArrOrNumArr2 = ToArrayNonDist<string | number>;
