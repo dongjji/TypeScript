@@ -1,100 +1,118 @@
 function Logger(constructor: Function) {
-  console.log("Logging...");
+  console.log("Logging...1");
   console.log(constructor);
 }
 
-function WithTemplate(template: string, hookId: string) {
-  console.log("TEMPLATE FACTORY");
-  return function <T extends { new (...args: any[]): { name: string } }>(
-    originalConstructor: T
-  ) {
-    // use _ if dont need to use
-    return class extends originalConstructor {
-      constructor(..._: any[]) {
-        super();
-        console.log("Rendering Template");
-        const hookElement = document.getElementById(hookId);
-        if (hookElement) {
-          hookElement.innerHTML = template;
-          hookElement.querySelector("h1")!.textContent = this.name;
-        }
-      }
-    };
-  };
-}
-
-@Logger2("Logging")
-@WithTemplate("<h1>My Person Object</h1>", "app")
+@Logger
 class Person {
   name = "Dong";
 
   constructor() {
-    console.log("Creating person object");
+    console.log("Creating person object1");
   }
 }
 
-const pers = new Person();
-
-console.log(pers);
-
-function Logger2(logString: string) {
+// Decorator Factory
+function Logger2() {
   return function (constructor: Function) {
-    console.log(logString);
+    console.log("Logging...2");
     console.log(constructor);
   };
 }
 
-@Logger2("Logging - Person")
+@Logger2()
 class Person2 {
-  name = "Max";
+  name = "Dong";
 
   constructor() {
-    console.log("Creating person object");
+    console.log("Creating person object2");
   }
 }
 
+@Logger
+@Logger2()
+class Person3 {
+  name = "Dong";
+
+  constructor() {
+    console.log("Creating person object3");
+  }
+}
+
+// const person = new Person();
+// const person2 = new Person2();
+// const person3 = new Person3();
+
+// console.log(person);
+
+function WithTemplate(template: string, hookId: string) {
+  return function (constructor: any) {
+    const hookEl = document.getElementById(hookId);
+    const p = new constructor();
+    if (hookEl) {
+      hookEl.innerHTML = template;
+      hookEl.querySelector("h1")!.textContent = p.name;
+    }
+  };
+}
+
+@WithTemplate("<h1>My Person Object</h1>", "app")
+class Person4 {
+  name = "Dong";
+
+  constructor() {
+    console.log("Creating person object3");
+  }
+}
+
+const person4 = new Person4();
+
+/////////////////////////////////////
 // Property Decorator
-function Log(target: any, propertyName: string | symbol) {
-  console.log("Property Decorator!");
-  console.log(target, propertyName);
+function Log(target: any, propertyName: string | Symbol) {
+  console.log("Property Decorator");
+  console.log(target);
+  console.log(propertyName);
 }
 
 // Accessor Decorator
-function Log2(target: any, name: string, description: PropertyDescriptor) {
+function Log2(target: any, name: string, descriptor: PropertyDescriptor) {
   console.log("Accessor Decorator!");
   console.log(target);
   console.log(name);
-  console.log(description);
+  console.log(descriptor);
 }
 
 // Method Decorator
 function Log3(
   target: any,
-  name: string | symbol,
+  name: string | Symbol,
   descriptor: PropertyDescriptor
 ) {
+  console.log("Method Decorator");
   console.log(target);
   console.log(name);
   console.log(descriptor);
 }
+
 // Parameter Decorator
-function Log4(target: any, name: string | symbol, position: number) {
+function Log4(target: any, name: string | Symbol, position: number) {
+  console.log("Parameter Decorator");
   console.log(target);
   console.log(name);
   console.log(position);
 }
-
 class Product {
   @Log
   title: string;
   private _price: number;
 
   @Log2
-  set price(price: number) {
-    if (price > 0) {
-      this._price = price;
+  set price(value: number) {
+    if (value > 0) {
+      this._price = value;
     } else {
-      throw new Error("Invalid Price - Should be positive");
+      throw new Error("price should be positive");
     }
   }
 
@@ -109,33 +127,8 @@ class Product {
   }
 }
 
-// decorator will not execute
-const p1 = new Product("Book", 20);
-const p2 = new Product("Book2", 30);
+const book1 = new Product("a book", 19);
+const book2 = new Product("a book2", 20);
 
-function Autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
-  const originalMethod = descriptor.value;
-  const adjDescriptor: PropertyDescriptor = {
-    configurable: true,
-    enumerable: false,
-    get() {
-      const boundFn = originalMethod.bind(this);
-      return boundFn;
-    },
-  };
-  return adjDescriptor;
-}
-
-class Printer {
-  message = "This works!";
-
-  @Autobind
-  showMessage() {
-    console.log(this.message);
-  }
-}
-
-const p = new Printer();
-
-const button = document.querySelector("button")!;
-button.addEventListener("click", p.showMessage);
+// Property, Accessor, Method, Parameter Decorator는 instance가 생성될 때 수행되는 것이 아니라
+// class가 선언될 때 수행
