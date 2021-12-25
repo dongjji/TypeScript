@@ -47,13 +47,17 @@ Person3 = __decorate([
     Logger2()
 ], Person3);
 function WithTemplate(template, hookId) {
-    return function (constructor) {
-        const hookEl = document.getElementById(hookId);
-        const p = new constructor();
-        if (hookEl) {
-            hookEl.innerHTML = template;
-            hookEl.querySelector("h1").textContent = p.name;
-        }
+    return function (originalConstructor) {
+        return class extends originalConstructor {
+            constructor(..._) {
+                super();
+                const hookEl = document.getElementById(hookId);
+                if (hookEl) {
+                    hookEl.innerHTML = template;
+                    hookEl.querySelector("h1").textContent = this.name;
+                }
+            }
+        };
     };
 }
 let Person4 = class Person4 {
@@ -82,6 +86,7 @@ function Log3(target, name, descriptor) {
     console.log(target);
     console.log(name);
     console.log(descriptor);
+    return {};
 }
 function Log4(target, name, position) {
     console.log("Parameter Decorator");
@@ -118,4 +123,64 @@ __decorate([
 ], Product.prototype, "getPriceWithTax", null);
 const book1 = new Product("a book", 19);
 const book2 = new Product("a book2", 20);
+function Autobind(_target, _methodName, descriptor) {
+    console.log(descriptor);
+    const originalMethod = descriptor.value;
+    const adjDescriptor = {
+        configurable: true,
+        enumerable: false,
+        get() {
+            const boundFn = originalMethod.bind(this);
+            return boundFn;
+        },
+    };
+    return adjDescriptor;
+}
+class Printer {
+    constructor() {
+        this.message = "This Works!";
+    }
+    showMessage() {
+        console.log(this.message);
+    }
+}
+__decorate([
+    Autobind
+], Printer.prototype, "showMessage", null);
+const p = new Printer();
+const button = document.querySelector("button");
+button.addEventListener("click", p.showMessage);
+function sealed(constructor) {
+    Object.seal(constructor);
+    Object.seal(constructor.prototype);
+}
+let BugReport = class BugReport {
+    constructor(t) {
+        this.type = "report";
+        this.title = t;
+    }
+};
+BugReport = __decorate([
+    sealed
+], BugReport);
+function reportableClassDecorator(constructor) {
+    return class extends constructor {
+        constructor() {
+            super(...arguments);
+            this.reportingURL = "http://www...";
+        }
+    };
+}
+let BugReport2 = class BugReport2 {
+    constructor(t) {
+        this.type = "report";
+        this.title = t;
+    }
+};
+BugReport2 = __decorate([
+    reportableClassDecorator
+], BugReport2);
+const bug = new BugReport("Needs dark mode");
+console.log(bug.title);
+console.log(bug.type);
 //# sourceMappingURL=app.js.map
