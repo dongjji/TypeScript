@@ -15,4 +15,5 @@
   13. [Mapped Type](https://blog.naver.com/y2kdj9723/222600188257, "개발할 생각")
   14. [Template Literal Type](https://blog.naver.com/y2kdj9723/222601232735, "개발할 생각")
   15. [Decorator - 1](https://blog.naver.com/y2kdj9723/222602904167, "개발할 생각")
-  15. [Decorator - 2(Class Decorator)](https://blog.naver.com/y2kdj9723/222604492803, "개발할 생각")
+  16. [Decorator - 2(Class Decorator)](https://blog.naver.com/y2kdj9723/222604492803, "개발할 생각")
+  17. [Decorator - 3(Method Decorator)](https://blog.naver.com/y2kdj9723/222605102169, "개발할 생각")

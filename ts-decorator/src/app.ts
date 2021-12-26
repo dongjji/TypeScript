@@ -212,3 +212,25 @@ console.log(bug.type); // Prints "report"
 // and so the new property `reportingURL` is not known
 // to the type system:
 // bug.reportingURL; // error : 'BugReport' 형식에 'reportingURL' 속성이 없습니다.
+
+function enumerable(value: boolean) {
+  return function (
+    _target: any,
+    _propertyKey: string,
+    descriptor: PropertyDescriptor
+  ) {
+    descriptor.enumerable = value;
+  };
+}
+
+class Greeter {
+  greeting: string;
+  constructor(message: string) {
+    this.greeting = message;
+  }
+
+  @enumerable(false)
+  greet() {
+    return "Hello, " + this.greeting;
+  }
+}
