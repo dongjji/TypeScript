@@ -17,3 +17,4 @@
   15. [Decorator - 1](https://blog.naver.com/y2kdj9723/222602904167, "개발할 생각")
   16. [Decorator - 2(Class Decorator)](https://blog.naver.com/y2kdj9723/222604492803, "개발할 생각")
   17. [Decorator - 3(Method Decorator)](https://blog.naver.com/y2kdj9723/222605102169, "개발할 생각")
+  18. [Decorator - 4(Accessor Decorator)](https://blog.naver.com/y2kdj9723/222605561827, "개발할 생각")

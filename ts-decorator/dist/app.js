@@ -183,4 +183,110 @@ BugReport2 = __decorate([
 const bug = new BugReport("Needs dark mode");
 console.log(bug.title);
 console.log(bug.type);
+function enumerable(value) {
+    return function (_target, _propertyKey, descriptor) {
+        descriptor.enumerable = value;
+    };
+}
+class Greeter {
+    constructor(message) {
+        this.greeting = message;
+    }
+    greet() {
+        return "Hello, " + this.greeting;
+    }
+}
+__decorate([
+    enumerable(false)
+], Greeter.prototype, "greet", null);
+function configurable(value) {
+    return function (target, propertyKey, descriptor) {
+        console.log(target);
+        console.log(propertyKey);
+        console.log(descriptor);
+        descriptor.configurable = value;
+    };
+}
+class Point {
+    constructor(x, y) {
+        this._x = x;
+        this._y = y;
+    }
+    get x() {
+        return this._x;
+    }
+    get y() {
+        return this._y;
+    }
+}
+__decorate([
+    configurable(false)
+], Point.prototype, "x", null);
+__decorate([
+    configurable(false)
+], Point.prototype, "y", null);
+let point = new Point(10, 20);
+point.x;
+point.y;
+const registeredValidators = {};
+function Required(target, propertyKey) {
+    var _a, _b;
+    registeredValidators[target.constructor.name] = Object.assign(Object.assign({}, registeredValidators[target.constructor.name]), { [propertyKey]: [
+            ...((_b = (_a = registeredValidators[target.constructor.name]) === null || _a === void 0 ? void 0 : _a[propertyKey]) !== null && _b !== void 0 ? _b : []),
+            "required",
+        ] });
+}
+function PositiveNumber(target, propertyKey) {
+    var _a, _b;
+    registeredValidators[target.constructor.name] = Object.assign(Object.assign({}, registeredValidators[target.constructor.name]), { [propertyKey]: [
+            ...((_b = (_a = registeredValidators[target.constructor.name]) === null || _a === void 0 ? void 0 : _a[propertyKey]) !== null && _b !== void 0 ? _b : []),
+            "positive",
+        ] });
+}
+function validate(obj) {
+    const objValidatorConfig = registeredValidators[obj.constructor.name];
+    if (!objValidatorConfig) {
+        return true;
+    }
+    let isValid = true;
+    for (const prop in objValidatorConfig) {
+        for (const validator of objValidatorConfig[prop]) {
+            switch (validator) {
+                case "required":
+                    isValid = isValid && !!obj[prop];
+                    break;
+                case "positive":
+                    isValid = isValid && obj[prop] > 0;
+                    break;
+            }
+        }
+    }
+    return isValid;
+}
+class Course {
+    constructor(title, price) {
+        this.title = title;
+        this.price = price;
+    }
+}
+__decorate([
+    Required
+], Course.prototype, "title", void 0);
+__decorate([
+    PositiveNumber
+], Course.prototype, "price", void 0);
+const courseForm = document.querySelector("form");
+courseForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const titleInput = document.getElementById("title");
+    const priceInput = document.getElementById("price");
+    const title = titleInput.value;
+    const price = +priceInput.value;
+    const createdCourse = new Course(title, price);
+    if (!validate(createdCourse)) {
+        alert("Invalid Input, Please try again");
+        return;
+    }
+    console.log(createdCourse);
+});
 //# sourceMappingURL=app.js.map

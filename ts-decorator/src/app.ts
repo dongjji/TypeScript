@@ -213,6 +213,8 @@ console.log(bug.type); // Prints "report"
 // to the type system:
 // bug.reportingURL; // error : 'BugReport' 형식에 'reportingURL' 속성이 없습니다.
 
+////////////////////////////////////////////////////////////////
+// Method Decorator
 function enumerable(value: boolean) {
   return function (
     _target: any,
@@ -234,3 +236,123 @@ class Greeter {
     return "Hello, " + this.greeting;
   }
 }
+
+////////////////////////////////////////////////////////////////
+// Accessor Decorator
+function configurable(value: boolean) {
+  return function (
+    target: any,
+    propertyKey: string,
+    descriptor: PropertyDescriptor
+  ) {
+    console.log(target);
+    console.log(propertyKey);
+    console.log(descriptor);
+    descriptor.configurable = value;
+  };
+}
+
+class Point {
+  private _x: number;
+  private _y: number;
+  constructor(x: number, y: number) {
+    this._x = x;
+    this._y = y;
+  }
+
+  @configurable(false)
+  get x() {
+    return this._x;
+  }
+
+  @configurable(false)
+  get y() {
+    return this._y;
+  }
+}
+
+let point = new Point(10, 20);
+point.x;
+point.y;
+
+////////////////////////////////////////////////////////////////
+// Validation with Decorator
+interface ValidatorConfig {
+  [property: string]: {
+    [validatableProperty: string]: string[];
+  };
+}
+
+const registeredValidators: ValidatorConfig = {};
+
+// property decorator for validation
+function Required(target: any, propertyKey: string) {
+  registeredValidators[target.constructor.name] = {
+    ...registeredValidators[target.constructor.name],
+    [propertyKey]: [
+      ...(registeredValidators[target.constructor.name]?.[propertyKey] ?? []),
+      "required",
+    ],
+  };
+}
+
+// property decorator for validation
+function PositiveNumber(target: any, propertyKey: string) {
+  registeredValidators[target.constructor.name] = {
+    ...registeredValidators[target.constructor.name],
+    [propertyKey]: [
+      ...(registeredValidators[target.constructor.name]?.[propertyKey] ?? []),
+      "positive",
+    ],
+  };
+}
+
+function validate(obj: any) {
+  const objValidatorConfig = registeredValidators[obj.constructor.name];
+  if (!objValidatorConfig) {
+    return true;
+  }
+  let isValid = true;
+  for (const prop in objValidatorConfig) {
+    for (const validator of objValidatorConfig[prop]) {
+      switch (validator) {
+        case "required":
+          isValid = isValid && !!obj[prop];
+          break;
+        case "positive":
+          isValid = isValid && obj[prop] > 0;
+          break;
+      }
+    }
+  }
+  return isValid;
+}
+class Course {
+  @Required
+  title: string;
+  @PositiveNumber
+  price: number;
+
+  constructor(title: string, price: number) {
+    this.title = title;
+    this.price = price;
+  }
+}
+
+const courseForm = document.querySelector("form")!;
+courseForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const titleInput = document.getElementById("title") as HTMLInputElement;
+  const priceInput = document.getElementById("price") as HTMLInputElement;
+
+  const title = titleInput.value;
+  const price = +priceInput.value;
+
+  const createdCourse = new Course(title, price);
+
+  if (!validate(createdCourse)) {
+    alert("Invalid Input, Please try again");
+    return;
+  }
+  console.log(createdCourse);
+});
