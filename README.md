@@ -35,3 +35,4 @@
 
   ## Utility Type
   * [Utility Type - 1(Partial Type)](https://blog.naver.com/y2kdj9723/222608391441, "개발할 생각")
+  * [Utility Type - 2(Required, Readonly Type)](https://blog.naver.com/y2kdj9723/222609364282, "개발할 생각")

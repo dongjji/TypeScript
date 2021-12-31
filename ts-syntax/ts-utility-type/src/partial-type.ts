@@ -7,10 +7,17 @@ function updateTodo(todo: Todo, fieldsToUpdate: Partial<Todo>) {
   return { ...todo, ...fieldsToUpdate };
 }
 
+const todo10: Partial<Todo> = {
+  title: "Hello",
+  // @ts-ignore
+  what: "World", // error
+};
+
 const todo1 = {
   title: "organize desk",
   description: "clear clutter",
 };
+updateTodo(todo1, todo10);
 updateTodo(todo1, todo1);
 
 const todo2 = {};
