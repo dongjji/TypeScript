@@ -1,9 +1,9 @@
 ## _Drag & Drop TodoList_
 1. TodoList 항목 추가하기
-![항목이 추가된 모습](/drag-drop/images/image1.png)
+<img src="/drag-drop/images/image1.PNG" width="150"/>
 
 2. Drag & Drop
-![Drag하여 완료한 일 항목으로 Drop하는 모습](/drag-drop/images/image2.png)
+<img src="/drag-drop/images/image2.PNG" width="150"/>
 
 3. TodoList 항목 완료하기
-![Drop한 뒤 항목이 옮겨진 모습](/drag-drop/images/image3.png)
+<img src="/drag-drop/images/image3.PNG" width="150"/>
