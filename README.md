@@ -37,3 +37,4 @@
   * [Utility Type - 1(Partial Type)](https://blog.naver.com/y2kdj9723/222608391441, "개발할 생각")
   * [Utility Type - 2(Required, Readonly Type)](https://blog.naver.com/y2kdj9723/222609364282, "개발할 생각")
   * [Utility Type - 3(Record, Pick)](https://blog.naver.com/y2kdj9723/222610130400, "개발할 생각")
+  * [Utility Type - 4(Omit, Exclude, Extract)](https://blog.naver.com/y2kdj9723/222610836005, "개발할 생각")
