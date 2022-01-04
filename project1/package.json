@@ -1,22 +1,20 @@
 {
-  "name": "todo-list",
+  "name": "understanding-typescript",
   "version": "1.0.0",
   "description": "Understanding TypeScript Course Setup",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server",
-    "build": "webpack --config webpack.config.prod.js"
+    "start": "webpack-dev-server --no-inline"
   },
   "keywords": [
     "typescript",
     "course"
   ],
-  "author": "DongJJI",
+  "author": "Maximilian Schwarzmüller",
   "license": "ISC",
   "devDependencies": {
-    "clean-webpack-plugin": "^3.0.0",
-    "lite-server": "^2.5.4",
+    "@types/google.maps": "^3.47.2",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.2",
     "webpack": "^4.41.2",
@@ -24,6 +22,6 @@
     "webpack-dev-server": "^3.9.0"
   },
   "dependencies": {
-    "lodash": "^4.17.21"
+    "axios": "^0.24.0"
   }
 }
