@@ -39,3 +39,4 @@
   * [Utility Type - 3(Record, Pick)](https://blog.naver.com/y2kdj9723/222610130400, "개발할 생각")
   * [Utility Type - 4(Omit, Exclude, Extract)](https://blog.naver.com/y2kdj9723/222610836005, "개발할 생각")
   * [Utility Type - 5(NonNullable, Parameters, ConstructorParameters, ReturnType)](https://blog.naver.com/y2kdj9723/222611521601, "개발할 생각")
+  * [Utility Type - 6(InstanceType, ThisParameterType)](https://blog.naver.com/y2kdj9723/222612505616, "개발할 생각")

@@ -24,11 +24,13 @@ type RT5 = ReturnType<any>;
 type RT6 = ReturnType<never>;
 // type RT6 = never
 
+// @ts-ignore
 type RT7 = ReturnType<string>;
 // 'string' 형식이 '(...args: any) => any' 제약 조건을 만족하지 않습니다.
 // type RT7 = any
 
+// @ts-ignore
 type RT8 = ReturnType<Function>;
 // 'Function' 형식이 '(...args: any) => any' 제약 조건을 만족하지 않습니다.
-//   'Function' 형식에서 '(...args: any): any' 시그니처에 대한 일치하는 항목을 제공하지 않습니다.
+// 'Function' 형식에서 '(...args: any): any' 시그니처에 대한 일치하는 항목을 제공하지 않습니다.
 // type RT8 = any
