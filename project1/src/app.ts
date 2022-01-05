@@ -29,7 +29,10 @@ function searchAddress(event: Event): void {
   geocoder.geocode({ address: address.value }, function (results, status) {
     if (status === "OK") {
       let loc = results![0].geometry.location;
-      map.setCenter(loc);
+      map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
+        center: loc,
+        zoom: 16,
+      });
       //   let marker = new google.maps.Marker({
       //     map: map,
       //     position: loc,
