@@ -20,6 +20,19 @@ const todo1 = {
 updateTodo(todo1, todo10);
 updateTodo(todo1, todo1);
 
+// @ts-ignore
+// error
+updateTodo(todo1, { title: "Hello", description: "World", color: "Red" });
+
+// error
+const todo12: Partial<Todo> = {
+  title: "Hello",
+  description: "World",
+  // @ts-ignore
+  color: "Red",
+};
+updateTodo(todo1, todo12);
+
 const todo2 = {};
 updateTodo(todo1, todo2);
 

@@ -1,4 +1,4 @@
-interface Todo {
+interface Todo3 {
   title: string;
   description: string;
   completed: boolean;
@@ -6,7 +6,7 @@ interface Todo {
 }
 
 // @ts-ignore
-type TodoPreview = Omit<Todo, "description">;
+type TodoPreview = Omit<Todo3, "description">;
 
 // @ts-ignore
 const todo: TodoPreview = {
@@ -21,7 +21,7 @@ todo;
 // @ts-ignore
 const todo: TodoPreview;
 
-type TodoInfo = Omit<Todo, "completed" | "createdAt">;
+type TodoInfo = Omit<Todo3, "completed" | "createdAt">;
 
 const todoInfo: TodoInfo = {
   title: "Pick up kids",
