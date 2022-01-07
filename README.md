@@ -4,6 +4,7 @@
   * [Basic Type - number, string, boolean](https://blog.naver.com/y2kdj9723/222568007560, "개발할 생각")
   * [More Types](https://blog.naver.com/y2kdj9723/222572369308, "개발할 생각")
   * [Intersection Type](https://blog.naver.com/y2kdj9723/222574694033, "개발할 생각")
+  * [Enum](https://blog.naver.com/y2kdj9723/222615300638, "개발할 생각")
   ## Class
   * [Class](https://blog.naver.com/y2kdj9723/222573855582, "개발할 생각")
 
